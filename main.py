@@ -10,7 +10,7 @@ def draw_top():
     font_top = pygame.font.SysFont('simsun', 30)
     font_game = pygame.font.SysFont('simsun', 24)
     text_head = font_top.render('Best tries: ', True, COLOR_TEXT)
-    screen.blit(text_head, (250, 5))
+    screen.blit(text_head, (250, 0))
     for index, game in enumerate(GAMERS_SQL):
         name, record = game
         s = f'{index + 1}. {name} - {record}'
@@ -29,7 +29,7 @@ def draw_ui(score, delta=0):
     screen.blit(text_score_value, (175, 35))
     if delta > 0:
         text_delta = font_delta.render(f'+{delta}', True, COLOR_TEXT)
-        screen.blit(text_delta, (225, 45))
+        screen.blit(text_delta, (165, 75))
     print(mas)
     for row in range(BLOCKS):
         for col in range(BLOCKS):
