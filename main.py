@@ -101,7 +101,7 @@ pygame.display.set_caption('2048')
 
 
 def draw_intro():
-    img_2048 = pygame.image.load('2048.jpg')
+    img_2048 = pygame.image.load('2048_without_bg.png')
     font = pygame.font.SysFont('stxingkai', 70)
     text_welcome = font.render('Welcome', True, WHITE)
     name = 'Enter your name '
@@ -140,7 +140,7 @@ def draw_intro():
 
 def draw_game_over():
     global USERNAME, GAMERS_SQL
-    img_2048 = pygame.image.load('2048.jpg')
+    img_2048 = pygame.image.load('2048_without_bg.png')
     font = pygame.font.SysFont('stxingkai', 60)
     text_game_over = font.render('Game Over', True, WHITE)
     text_score = font.render(f'You are typed: {score}', True, WHITE)
