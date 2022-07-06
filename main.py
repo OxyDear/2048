@@ -1,7 +1,9 @@
+import json
 from funcs import *
 import pygame
 import sys
 from database import get_best, cur, bd
+import os
 
 GAMERS_SQL = get_best()
 
@@ -92,8 +94,18 @@ def init_const():
 
 mas = None
 score = None
-init_const()
 USERNAME = None
+path = os.getcwd()
+if 'data.txt' in os.listdir():
+    with open('data.txt') as file:
+        data = json.load(file)
+        mas = data['mas']
+        score = data['score']
+        USERNAME = data['user']
+    full_path = os.path.join(path, 'data.txt')
+    os.remove(full_path)
+else:
+    init_const()
 
 pygame.init()
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
@@ -182,18 +194,27 @@ def draw_game_over():
     screen.fill(BlACK)
 
 
-draw_intro()
-draw_ui(score)
-draw_top()
-pygame.display.update()
+def save_game():
+    data = {
+        'user': USERNAME,
+        'score': score,
+        'mas': mas
+    }
+
+    with open('data.txt', 'w') as outfile:
+        json.dump(data, outfile)
 
 
 def game_loop():
     global score, mas
+    draw_ui(score)
+    draw_top()
+    pygame.display.update()
     mas_move = False
     while zero_in_mas(mas) or can_move(mas):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
+                save_game()
                 pygame.quit()
                 sys.exit()
             elif event.type == pygame.KEYDOWN:
